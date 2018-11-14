@@ -42,6 +42,12 @@ function noWeakLink() {
   return $http({
     method: 'GET',
     url: '/api/users'
+  }).then((first)=>{
+    firstUser = first.data[0]
+    return first;
+  }).then(second=>{
+    thirdUser = second.data[2]
+    return second.data[9]
   })
   // CODE HERE...
 
@@ -75,6 +81,8 @@ function large() {
 }
 // CODE HERE...
 
+let boundToElephant = large.bind(elephant)
+
 
 
 // *************
@@ -88,6 +96,9 @@ function large() {
 // and return the bound function.
 
 // CODE HERE...
+function deathStar(func,crew){
+  return func.bind(crew)
+}
 
 
 
@@ -103,6 +114,11 @@ function large() {
 // The closure function will return the combined value of assets and liabilities.
 
 // CODE HERE...
+function accountingOffice(assets){
+  return function(liabilities){
+    return assets +liabilities
+  }
+}
 
 
 
@@ -128,6 +144,16 @@ function large() {
 // };
 
 // CODE HERE...
+function forgetter(str){
+  let arrayToRemember = []
+  return function rememberall(item){
+    arrayToRemember.push(item)
+    return {
+      name:str,
+      remember: arrayToRemember
+    }
+  }
+}
 
 
 
@@ -156,3 +182,50 @@ function large() {
 // NOTE: Neither hunger nor danger should be able to exceed 100 or drop below 0.
 
 // CODE HERE...
+
+function frodo(startingHungerValue,startingDangerValue){
+  let startingHunger = startingHungerValue;
+  let startingDanger = startingDangerValue;
+    return {
+      dinnerOverFire: function(){
+        startingHunger =  startingHunger-25;
+        startingDanger = startingDanger + 40;
+        if(startingHunger > 100){
+          startingHunger = 100;
+        }
+        if(startingDanger >100){
+          startingDanger = 100;
+        }
+        if(startingHunger < 0){
+          startingHunger = 0;
+        }
+        if(startingDanger <0){
+          startingDanger = 0;
+        }
+        return {
+          hunger:startingHunger,
+          danger:startingDanger
+        }
+      },
+      hidingInBush: function(){
+        startingHunger =  startingHunger+35;
+        startingDanger = startingDanger - 20;
+        if(startingHunger > 100){
+          startingHunger = 100;
+        }
+        if(startingDanger >100){
+          startingDanger = 100;
+        }
+        if(startingHunger < 0){
+          startingHunger = 0;
+        }
+        if(startingDanger <0){
+          startingDanger = 0;
+        }
+        return {
+          hunger:startingHunger,
+          danger:startingDanger
+        }
+      }
+    }
+}
