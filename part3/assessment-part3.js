@@ -13,6 +13,15 @@
 // return the result of your updateAnimal invocation
 
 // CODE HERE...
+function callBinding(magicAnimals,updateAnimal,id){
+    let toReturn;
+    magicAnimals.map(animal=>{
+        if(animal.id === id){
+            toReturn = animal;
+        }
+    })
+    return updateAnimal.call(toReturn,"Trogdor")
+}
 
 
 
@@ -28,6 +37,16 @@
 // return the result of your updateAnimal invocation
 
 // CODE HERE...
+function applyBinding(magicAnimals,updateAnimal,id){
+    let toReturn;
+    magicAnimals.map(animal=>{
+        if(animal.id === id){
+            toReturn = animal;
+        }
+    })
+    return updateAnimal.apply(toReturn,['being majestic', 'eating rainbows'])
+}
+
 
 
 
@@ -48,6 +67,16 @@
 var foo;
 
 // CODE HERE...
+
+function promiseMe($q){
+    return  $q((resolve,reject) => {
+        // foo = "bar"
+        // resolve(foo)
+    })
+}
+
+// let promise = promiseMe($q)
+// promise.then((res)=>setTimeout(res(),20))
 
 
 
