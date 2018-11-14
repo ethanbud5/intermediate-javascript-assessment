@@ -69,14 +69,16 @@ var foo;
 // CODE HERE...
 
 function promiseMe($q){
-    return  $q((resolve,reject) => {
-        // foo = "bar"
-        // resolve(foo)
-    })
+    let deferred = $q.defer();
+    setTimeout(function(){
+        foo = "bar"
+        deferred.resolve(foo)
+    },20)
+    return deferred.promise;
 }
 
 // let promise = promiseMe($q)
-// promise.then((res)=>setTimeout(res(),20))
+// promise.then((res)=>res())
 
 
 
@@ -93,3 +95,13 @@ function promiseMe($q){
 // and then resolve the array as you complete your promise.
 
 // CODE HERE...
+
+function emailList($q,$http){
+    return $http({
+        method: 'GET',
+        url: '/api/users'
+      }).then(res=>{
+        //   console.log(res)
+          return res.data.map(user=>user.email)
+      })
+    }
